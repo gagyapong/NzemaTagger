@@ -26,29 +26,33 @@ def remove_punct(sentence):
 def read_xml_data(filename):
     '''
     Takes in an .xml filename path
-    Creates and returns a ConditionalFreqDist with all samples of annotated words
+    Creates and returns a list of annotated sentences in the form [(word, tag), ...]
     '''
 
-    fdist = ConditionalFreqDist()
-
+    taglist = ['PRON', 'SCONJ', 'ADV', 'DET', 'INTJ', 'X', 'PART', 'ADP',
+                    'SYM', 'NUM', 'CCONJ', 'VERB', 'PROPN', 'ADJ', 'NOUN']
+    
     with open(filename, 'r') as file:
         data = file.read()
 
         bs_data = BeautifulSoup(data, 'xml')
-        words = bs_data.find_all('word')
-        word_tags = []
+        tagged_sentences = []
 
-        for word in words:
-            content = word.text.split()
+        for phrase in bs_data.find_all('phrase'):
+            sent = []
+            
+            # Punctuation words are not annotated, thus we need to check for pairings
+            words = phrase.words.text.split()
+            for t1, t2 in zip (words[:-1], words[1:]):
+                if t1 in taglist or t2 not in taglist:
+                    continue
+                else:
+                    sent.append((t1, t2))
+            
+            tagged_sentences.append(sent)
 
-            if (len(content) == 1): # Skip words with no annotation
-                continue
-
-            word_tags.append(tuple(content))
-        
-        fdist = ConditionalFreqDist(word_tags)
-
-    return fdist
+        return tagged_sentences
+                
 
 # CONTENT FUNCTIONS 
 
