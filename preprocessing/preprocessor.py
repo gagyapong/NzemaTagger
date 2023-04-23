@@ -108,7 +108,8 @@ def preprocess_gs_data():
 def parse_gs_xml(filename):
     '''
     Takes in an .xml filename path
-    Creates and returns a list of annotated sentences in the form [(word, tag), ...]
+    Returns a dictionary of preprocessed sentences
+    The {key : value} pairs are as follows -- {filename : list of sentences}
     '''
     
     with open(filename, 'r') as file:
