@@ -20,7 +20,7 @@ def main():
         for sentence in values:
             test_data_tagged[key].append(tagger.tag(sentence))
 
-    evaluator.evaluate(test_data_dict, gs_data_dict)
+    evaluator.evaluate(test_data_tagged, gs_data_dict)
     
 if __name__ == "__main__":
     main()
