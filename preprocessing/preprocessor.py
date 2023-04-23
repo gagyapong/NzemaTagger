@@ -143,6 +143,7 @@ def parse_gs_xml(filename):
             if re.search('2', tup[0]):
                 gs_tag_dict['passage1.txt'] = tagged_sentences
                 tagged_sentences = []
+                continue
 
             if not re.search(r'[^\w\s]', tup[0]):
                     sent.append(tup)
