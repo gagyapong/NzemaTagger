@@ -8,13 +8,13 @@ This is a Python-based Parts of Speech (POS) Tagger for the Nzema language. The 
 ## Dependencies
 The following dependencies are required to run the POS Tagger:
 * nltk
-* re
+* bs4
 * matplotlib
 
 ## Installation
 To install the required dependencies, you can use the following command:
 ```
-pip3 install nltk re matplotlib
+pip3 install nltk bs4 matplotlib
 ```
 
 ## Usage
