@@ -1,4 +1,9 @@
+# Pycache trickery
 *.pyc
 *.pyo
 
+# MacOS trickery
 .DS_Store
+
+# Output plots
+data/plots/*.png

@@ -20,7 +20,18 @@ def main():
         for sentence in values:
             test_data_tagged[key].append(tagger.tag(sentence))
 
-    evaluator.evaluate(test_data_tagged, gs_data_dict)
+    metrics_dict = evaluator.evaluate(test_data_tagged, gs_data_dict)
+
+    # Compound metrics to evaluate whole tagger
+    TP = 0; FP = 0; FN = 0
+    for tag, metrics in zip(metrics_dict.keys(), metrics_dict.values()):
+        evaluator.generate_confusion_matrix(tag, metrics['TP'], metrics['FP'], metrics['FN'])
+        TP += metrics['TP']; FP += metrics['FP']; FN += metrics['FN']
+
+    # Evaluate tagger
+    evaluator.generate_confusion_matrix('TAGGER', TP, FP, FN)
+    
+    return
     
 if __name__ == "__main__":
     main()

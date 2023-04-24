@@ -1,6 +1,5 @@
 import os
 import re
-from nltk import ConditionalFreqDist
 from bs4 import BeautifulSoup
 
 # CONSTANTS
@@ -27,9 +26,6 @@ def parse_training_xml(filename):
     Creates and returns a list of annotated sentences in the form [(word, tag), ...]
     '''
 
-    taglist = ['PRON', 'SCONJ', 'ADV', 'DET', 'INTJ', 'X', 'PART', 'ADP',
-                    'SYM', 'NUM', 'CCONJ', 'VERB', 'PROPN', 'ADJ', 'NOUN']
-    
     with open(filename, 'r') as file:
         data = file.read()
 
