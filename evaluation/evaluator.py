@@ -1,4 +1,5 @@
 import matplotlib.pyplot as plt
+import os
 
 metrics_dict = {}
 taglist = ['PRON', 'SCONJ', 'ADV', 'DET', 'INTJ', 'X', 'PART', 'ADP',
@@ -69,6 +70,10 @@ def generate_confusion_matrix(tag, TP, FP, FN):
     plt.text(-1, -1.1, f'{tag}\nAccuracy: {accuracy:.2f}\nPrecision: {precision:.2f}\nRecall: {recall:.2f}\nF1 Score: {f1:.2f}',
          ha='left', va='center', fontsize=12, fontweight='bold')
 
+    # If path doesn't already exist, create it
+    if not os.path.exists('./data/plots'):
+        os.makedirs('./data/plots')
+        
     # Save plot as image
     confusion_matrix_plot.savefig('./data/plots/' + tag + '.png', dpi=300, bbox_inches='tight')
 
